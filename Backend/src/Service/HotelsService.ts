@@ -1,5 +1,9 @@
 import { HotelsMapper } from "../Mappers/HotelsMapper";
 import { HotelRepository } from "../Repository/HotelsRepository";
+import { HotelSearchResponse } from './../Models/HotelSearchResponse';
+import { HotelDetailsResponse } from './../Models/HotelDetailsResponse';
+import { language } from "../Constants/Constants";
+import { Hotel } from "../Models/Hotel";
 
 export class HotelsService {
     private mapper: HotelsMapper
@@ -10,21 +14,21 @@ export class HotelsService {
         this.repository = new HotelRepository()
     }
 
-    getAllHotels(language: string) {
+    getAllHotels(language: language) : HotelSearchResponse[] {
         console.log("[Service] -> getAllHotels")
-        this.repository.getAllHotels("en")
-        this.mapper.repoToModel()
+        const hotels: Hotel[] = this.repository.getAllHotels()
+        return this.mapper.mapToSearchModel(hotels, language)
     }
 
-    getHotelBySearchTerm(language: string, searchTerm: string) {
+    getHotelBySearchTerm(language: language, searchTerm: string) : HotelSearchResponse[] {
         console.log("[Service] -> getHotelBySearchTerm")
-        this.repository.getHotelBySearchTerm("en","search-term")
-        this.mapper.repoToModel()
+        const hotels: Hotel[] = this.repository.getHotelBySearchTerm( searchTerm, language)
+        return this.mapper.mapToSearchModel(hotels, language)
     }
 
-    getHotelDetails(language: string, hotelId: number) {
+    getHotelDetails(language: language, hotelId: number) : HotelDetailsResponse  {
         console.log("[Service] -> getHotelDetails")
-        this.repository.getHotelDetails("en", 123)
-        this.mapper.repoToModel()
+        const hotel: Hotel = this.repository.getHotelDetails(hotelId)
+        return this.mapper.mapToDeatilsModel(hotel, language)
     }
 }
