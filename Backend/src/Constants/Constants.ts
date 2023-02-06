@@ -6,6 +6,6 @@ export const requestType = {
 export type language = "en-US" | "es-ES" | "de-DE" | "fr-FR"
 
 export const statusCodes = {
-    sucess: 200,
+    ok: 200,
     internalServerError: 500
 }

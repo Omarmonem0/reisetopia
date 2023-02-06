@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { HotelDetailsResponse } from "../Models/HotelDetailsResponse";
 import { HotelSearchResponse } from "../Models/HotelSearchResponse";
 import { HotelsService } from "../Service/HotelsService";
-import { requestType } from './../Constants/Constants';
+import { requestType, statusCodes } from './../Constants/Constants';
 import { BaseResponse } from './../Models/BaseResponse';
 import { BaseController } from './BaseController';
 
@@ -15,7 +15,7 @@ export class HotelsController extends BaseController {
     }
    
     healthCheck(req: Request, res: Response) {
-        res.status(200).send("Healthy")
+        res.status(statusCodes.ok).send("Healthy")
     }
 
     index(req: Request, res: Response) {
@@ -24,14 +24,14 @@ export class HotelsController extends BaseController {
             if (res.locals.type === requestType.index) {
                 const hotels : HotelSearchResponse[] = this.service.getAllHotels(res.locals.language)
                 const response : BaseResponse<HotelSearchResponse[]> = this.enrichResponse(hotels, true, "") 
-                res.status(200).send(response)
+                res.status(statusCodes.ok).send(response)
             }  
             else 
                 this.search(req, res)
         } catch (e) {
             console.log(e)
             const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
-            res.status(500).send(response)
+            res.status(statusCodes.internalServerError).send(response)
         }
     }
 
@@ -40,11 +40,11 @@ export class HotelsController extends BaseController {
         try {
             const searchResult : HotelSearchResponse[] = this.service.getHotelsBySearchTerm(res.locals.language, res.locals.searchTerm)
             const response : BaseResponse<HotelSearchResponse[]> = this.enrichResponse(searchResult, true, "") 
-            res.status(200).send(response)
+            res.status(statusCodes.ok).send(response)
         } catch (e) {
             console.log(e)
             const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
-            res.status(500).send(response)
+            res.status(statusCodes.internalServerError).send(response)
         }
     }
 
@@ -53,10 +53,10 @@ export class HotelsController extends BaseController {
         try {
             const hotelDetails : HotelDetailsResponse = this.service.getHotelDetails(res.locals.language, Number(req.params.hotelId))
             const response : BaseResponse<HotelDetailsResponse> = this.enrichResponse(hotelDetails, true,  "")
-            res.status(200).send(response)
+            res.status(statusCodes.ok).send(response)
         } catch(e) {
             const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
-            res.status(500).send(response)
+            res.status(statusCodes.internalServerError).send(response)
         }
     }
 }
