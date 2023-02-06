@@ -13,13 +13,14 @@ const port = process.env.PORT;
 Database.loadData()
 const hotelsController = new HotelsController()
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/healthCheck', (req: Request, res: Response) => {
   res.json("Healthy!")
 });
 
-app.get('/v1/recruiting/hotels', RequestTypeMiddleware.extractRequestType,
-  LocaleMiddleware.extractLocale,
+app.get('/v1/recruiting/hotels', [RequestTypeMiddleware.extractRequestType,
+  LocaleMiddleware.extractLocale],
   hotelsController.index.bind(hotelsController))
+
 app.get('/v1/recruiting/hotels/:hotelId', LocaleMiddleware.extractLocale, hotelsController.show.bind(hotelsController))
 
 app.listen(port, () => {

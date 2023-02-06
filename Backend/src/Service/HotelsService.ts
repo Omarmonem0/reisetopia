@@ -18,7 +18,7 @@ export class HotelsService {
         console.log("[Service] -> getAllHotels")
         try {
             const hotels: Hotel[] = this.repository.getAllHotels()
-            return this.mapper.mapToSearchModel(hotels, language)
+            return hotels.length ? this.mapper.mapToSearchModel(hotels, language) : []
         } catch (e) {
             throw e
         }
@@ -28,7 +28,7 @@ export class HotelsService {
         console.log("[Service] -> getHotelsBySearchTerm")
         try {
             const hotels: Hotel[] = this.repository.getHotelsBySearchTerm( searchTerm, language)
-            return this.mapper.mapToSearchModel(hotels, language)
+            return hotels.length ? this.mapper.mapToSearchModel(hotels, language) : []
         } catch (e) {
             throw e
         }
@@ -37,8 +37,8 @@ export class HotelsService {
     getHotelDetails(language: language, hotelId: number) : HotelDetailsResponse  {
         console.log("[Service] -> getHotelsDetails")
         try {
-            const hotel: Hotel = this.repository.getHotelDetails(hotelId)
-            return this.mapper.mapToDeatilsModel(hotel, language)
+            const hotels: Hotel[] = this.repository.getHotelDetails(hotelId)
+            return hotels.length ? this.mapper.mapToDeatilsModel(hotels[0], language) : {} as HotelDetailsResponse
         } catch (e) {
             throw e
         }

@@ -29,6 +29,7 @@ export class HotelsController extends BaseController {
             else 
                 this.search(req, res)
         } catch (e) {
+            console.log(e)
             const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
             res.status(500).send(response)
         }
@@ -37,10 +38,11 @@ export class HotelsController extends BaseController {
     search(req: Request, res: Response) {
         console.log("[Contoller] -> search")
         try {
-            const searchResult : HotelSearchResponse[] = this.service.getHotelsBySearchTerm(res.locals.langauge, res.locals.searchTerm)
+            const searchResult : HotelSearchResponse[] = this.service.getHotelsBySearchTerm(res.locals.language, res.locals.searchTerm)
             const response : BaseResponse<HotelSearchResponse[]> = this.enrichResponse(searchResult, true, "") 
             res.status(200).send(response)
         } catch (e) {
+            console.log(e)
             const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
             res.status(500).send(response)
         }
@@ -49,7 +51,7 @@ export class HotelsController extends BaseController {
     show(req: Request, res: Response) {
         console.log("[Contoller] -> show")
         try {
-            const hotelDetails : HotelDetailsResponse = this.service.getHotelDetails(res.locals.langauge, 123)
+            const hotelDetails : HotelDetailsResponse = this.service.getHotelDetails(res.locals.language, Number(req.params.hotelId))
             const response : BaseResponse<HotelDetailsResponse> = this.enrichResponse(hotelDetails, true,  "")
             res.status(200).send(response)
         } catch(e) {

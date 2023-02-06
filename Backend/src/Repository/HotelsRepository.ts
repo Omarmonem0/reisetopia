@@ -23,10 +23,10 @@ export class HotelRepository {
         
     }
 
-    getHotelDetails(hotelId: number): Hotel {
+    getHotelDetails(hotelId: number): Hotel[] {
         console.log("[Repo] -> getHotelDetails")
         try {
-            return Database.hotels.filter((hotel) => hotel.id === hotelId)[0]
+            return Database.hotels.filter((hotel) => hotel.id === hotelId)
         } catch (e) {
             throw e
         }

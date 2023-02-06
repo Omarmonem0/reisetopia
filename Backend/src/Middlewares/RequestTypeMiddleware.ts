@@ -3,6 +3,7 @@ import { requestType } from './../Constants/Constants';
 
 export class RequestTypeMiddleware {
     static extractRequestType (req: Request, res: Response, next: NextFunction) {
+        console.log("[RequestTypeMiddleware] -> extractRequestType")
         if(req.query && req.query.search && req.query.search.length) {
             res.locals.type = requestType.search
             res.locals.searchTerm = req.query.search
