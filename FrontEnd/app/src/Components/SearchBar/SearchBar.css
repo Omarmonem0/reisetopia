@@ -1,0 +1,19 @@
+.SearchBarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+}
+.SearchBarContainer .SearchBox {
+    height: 30px;
+    width: 50%;
+    margin-top: 50px;
+}
+.SearchBarContainer .SubmitButton {
+    height: 35px;
+    align-self: flex-end;
+}
+.SearchBarContainer .LanguageDropDown {
+    height: 35px;
+    align-self: flex-end;
+}
