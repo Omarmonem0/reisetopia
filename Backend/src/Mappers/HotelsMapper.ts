@@ -81,6 +81,7 @@ export class HotelsMapper {
     }
 
     calculateDistanceToCenter(lat: number, long: number): number {
+        // TODO: calculate distance
         return 0
     }
 
