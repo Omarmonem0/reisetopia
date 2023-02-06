@@ -11,6 +11,9 @@ const SearchPage: FC<SearchPageProps> = () => {
     const search = () => {
         console.log('Searching...')
     }
+    const changeLanguage = () => {
+        console.log('Changing language...')
+    }
     const dummyData: HotelCardProps[] = [{
         imageUrl: 'https://rt-hotel-images-prod.s3.amazonaws.com/2496_IcePortal_0_thumb.jpg',
         name: 'Grand Hyatt Berlin',
@@ -32,7 +35,7 @@ const SearchPage: FC<SearchPageProps> = () => {
 
     return (
         <>
-            <SearchBar submit={search} />
+            <SearchBar submit={search} changeLanguage={changeLanguage}/>
             <HotelsList hotelCards={dummyData} />
         </>
     );
