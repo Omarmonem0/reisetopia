@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
-import { runInThisContext } from "vm";
+import { HotelDetailsResponse } from "../Models/HotelDetailsResponse";
+import { HotelSearchResponse } from "../Models/HotelSearchResponse";
 import { HotelsService } from "../Service/HotelsService";
 import { requestType } from './../Constants/Constants';
+import { BaseResponse } from './../Models/BaseResponse';
+import { BaseController } from './BaseController';
 
-export class HotelsController {
+export class HotelsController extends BaseController {
     private service: HotelsService
 
     constructor() {
+        super()
         this.service = new HotelsService()
     }
    
@@ -16,22 +20,41 @@ export class HotelsController {
 
     index(req: Request, res: Response) {
         console.log("[Contoller] -> index")
-        if (res.locals.type === requestType.index)
-            this.service.getAllHotels(res.locals.language)
-        else 
-            this.search(req, res)
-        res.status(200).send()
+        try {
+            if (res.locals.type === requestType.index) {
+                const hotels : HotelSearchResponse[] = this.service.getAllHotels(res.locals.language)
+                const response : BaseResponse<HotelSearchResponse[]> = this.enrichResponse(hotels, true, "") 
+                res.status(200).send(response)
+            }  
+            else 
+                this.search(req, res)
+        } catch (e) {
+            const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
+            res.status(500).send(response)
+        }
     }
 
     search(req: Request, res: Response) {
         console.log("[Contoller] -> search")
-        this.service.getHotelBySearchTerm(res.locals.langauge, res.locals.searchTerm)
-        res.status(200).send()
+        try {
+            const searchResult : HotelSearchResponse[] = this.service.getHotelsBySearchTerm(res.locals.langauge, res.locals.searchTerm)
+            const response : BaseResponse<HotelSearchResponse[]> = this.enrichResponse(searchResult, true, "") 
+            res.status(200).send(response)
+        } catch (e) {
+            const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
+            res.status(500).send(response)
+        }
     }
 
     show(req: Request, res: Response) {
         console.log("[Contoller] -> show")
-        this.service.getHotelDetails(res.locals.langauge, 123)
-        res.status(200).send()
+        try {
+            const hotelDetails : HotelDetailsResponse = this.service.getHotelDetails(res.locals.langauge, 123)
+            const response : BaseResponse<HotelDetailsResponse> = this.enrichResponse(hotelDetails, true,  "")
+            res.status(200).send(response)
+        } catch(e) {
+            const response : BaseResponse<{}> = this.enrichResponse({},false, e as string)
+            res.status(500).send(response)
+        }
     }
 }

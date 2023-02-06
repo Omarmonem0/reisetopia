@@ -20,9 +20,9 @@ export class HotelsService {
         return this.mapper.mapToSearchModel(hotels, language)
     }
 
-    getHotelBySearchTerm(language: language, searchTerm: string) : HotelSearchResponse[] {
+    getHotelsBySearchTerm(language: language, searchTerm: string) : HotelSearchResponse[] {
         console.log("[Service] -> getHotelBySearchTerm")
-        const hotels: Hotel[] = this.repository.getHotelBySearchTerm( searchTerm, language)
+        const hotels: Hotel[] = this.repository.getHotelsBySearchTerm( searchTerm, language)
         return this.mapper.mapToSearchModel(hotels, language)
     }
 

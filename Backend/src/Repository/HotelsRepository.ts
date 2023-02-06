@@ -9,7 +9,7 @@ export class HotelRepository {
         return Database.hotels
     }
 
-    getHotelBySearchTerm(searchTerm: string, language: language): Hotel[] {
+    getHotelsBySearchTerm(searchTerm: string, language: language): Hotel[] {
         console.log("[Repo] -> getHotelBySearchTerm")
         return Database.hotels.filter((hotel) => hotel.name[language]?.includes(searchTerm))
         
