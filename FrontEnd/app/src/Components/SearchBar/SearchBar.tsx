@@ -1,17 +1,20 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { selectAppLanguage } from '../../Store/selectors';
 import './SearchBar.css';
 
 interface SearchBarProps {
     submit: () => void,
-    changeLanguage: () => void
+    changeLanguage: (e: string) => void
 }
 
 const SearchBar: FC<SearchBarProps> = ({ submit, changeLanguage }) => {
+    const langugeSelector = useSelector(selectAppLanguage)
     return (
         <>
             <div className='SearchBarContainer'>
                 <input className='SearchBox' type="text" placeholder="Search.." />
-                <select className='LanguageDropDown' onChange={changeLanguage}>
+                <select value={langugeSelector} className='LanguageDropDown' onChange={(e) => changeLanguage(e.target.value)}>
                     <option value="en-US">EN</option>
                     <option value="de-DE">DE</option>
                     <option value="fr-FR">FR</option>

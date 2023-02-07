@@ -1,18 +1,24 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { HotelCardProps } from '../../Components/Hotels/HotelCard/HotelCard';
 import HotelsList from '../../Components/Hotels/HotelsList/HotelList';
 import SearchBar from '../../Components/SearchBar/SearchBar';
+import { changeAppLanguage, fetchHotels } from '../../Store/actions';
+import { Language } from '../../Store/type';
 
 interface SearchPageProps {
 
 }
 
 const SearchPage: FC<SearchPageProps> = () => {
+    const dispatch = useDispatch()
+
     const search = () => {
         console.log('Searching...')
     }
-    const changeLanguage = () => {
-        console.log('Changing language...')
+    const changeLanguage = async (language: string) => {
+        dispatch(changeAppLanguage(language as Language))
+        dispatch(await fetchHotels()())
     }
     const dummyData: HotelCardProps[] = [{
         imageUrl: 'https://rt-hotel-images-prod.s3.amazonaws.com/2496_IcePortal_0_thumb.jpg',
