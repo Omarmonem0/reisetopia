@@ -1,6 +1,9 @@
-import { applyMiddleware, configureStore } from '@reduxjs/toolkit';
-import reducer from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import searchPagereducer from './searchPageSlice';
 
-const store = configureStore({reducer})
+const store = configureStore({reducer: {
+    searchPage: searchPagereducer
+}})
 
 export default store
+export type AppDisptach = typeof store.dispatch

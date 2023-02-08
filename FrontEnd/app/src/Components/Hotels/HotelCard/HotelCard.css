@@ -8,11 +8,13 @@
 }
 
 .HotelCardContainer .HotelImageSection img {
-        height: 200px;
+    height: 200px;
+    width: 300px
 }
 
 .HotelCardContainer .HotelInfoSection {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    width: 500px;
 }

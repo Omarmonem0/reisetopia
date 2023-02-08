@@ -9,7 +9,7 @@ const HotelsList: FC<HotelsListProps> = ({ hotelCards }) => {
     return (
         <>
             {
-                hotelCards.map((card) => <HotelCard {...card} />)
+                hotelCards.map((card) => <HotelCard {...card} key={card.name}/>)
             }
         </>
     );

@@ -33,7 +33,8 @@ interface Deal {
 export interface IPageState<T> {
   data: T,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
-  error: string | null
+  error: string | null,
+  language?: Language
 }
 
 export type Language = "de-DE" | "en-US" | "fr-FR" | "es-ES"
@@ -44,7 +45,7 @@ export interface IAppState {
   language: Language
 }
 
-export type Payload = Language | number | string | ISearchPageHotel[] | IDetailsPageHotel
+export type Payload = Language | number | string | ISearchPageHotel[] | IDetailsPageHotel | null
 
 export interface IAction {
   type: string,

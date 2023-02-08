@@ -1,5 +1,8 @@
+import { fetchAllHotels , fetchHotelById, searchByHotelName } from '../Services/HotelsService';
+import { IAction, IAppState, Language, Payload } from './type.d';
 import { Dispatch } from '@reduxjs/toolkit';
-import { Language } from './type.d';
+
+// sync actions
 export const changeAppLanguage = (language: Language) => {
     return {
         type: "CHANGE_LANGUAGE",
@@ -7,25 +10,38 @@ export const changeAppLanguage = (language: Language) => {
     }
 }
 
-export const fetchHotels = () => {
-    return async () => {
-        const response = await fetch(('https://dummyjson.com/products'))
-        const data = await response.json();
-        console.log(data)
-        return fetchHotelsSuccess(data)
-    }
-}
-
-export const fetchHotelsSuccess = (payload: any) => {
+const createPageStatusAction = (type: string, payload: Payload) : IAction => {
     return {
-        type: "FETCH_HOTELS_SUCCESS",
+        type,
         payload
     }
 }
 
-export const fetchHotelsFail = (error: string) => {
-    return {
-        type: "FETCH_HOTELS_FAIL",
-        payload: error
+
+// async actions
+export const fetchHotels = () => {
+    return async (dispatch: Dispatch, state: IAppState) => {
+        try {
+            dispatch(createPageStatusAction("FETCH_HOTELS_LOADING", null))
+            const hotels = await fetchAllHotels(state.language)
+            dispatch(createPageStatusAction("FETCH_HOTELS_SUCCESS", hotels))
+        } catch (e) {
+            dispatch(createPageStatusAction("FETCH_HOTELS_FAIL", e as string))
+        }  
     }
 }
+
+export const fetchHotelDetails = (hotelId: number) => {
+    return async (dispatch: Dispatch, state: IAppState) => {
+        try {
+            dispatch(createPageStatusAction("FETCH_HOTEL_DETAILS_LOADING", null))
+            const hotel = await fetchHotelById(state.language, hotelId)
+            dispatch(createPageStatusAction("FETCH_HOTEL_DETAILS_SUCCESS", hotel))
+        } catch (e) {
+            dispatch(createPageStatusAction("FETCH_HOTEL_DETAILS_FAIL", e as string))
+        } 
+    }
+}
+
+
+
