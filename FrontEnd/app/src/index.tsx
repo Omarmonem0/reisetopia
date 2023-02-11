@@ -5,14 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './Store/store';
-import { fetchHotels } from './Store/searchPageSlice';
+import { fetchHotelsThunk } from './Store/searchPage/searchPageSlice';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 // intial loading
-store.dispatch(fetchHotels("en-US"))
+store.dispatch(fetchHotelsThunk(''))
 
 root.render(
   <Provider store={store}>

@@ -1,3 +1,4 @@
+// hotel types
 export interface IBaseHotel {
   id: number,
   minPrice: number,
@@ -30,6 +31,8 @@ interface Deal {
   details: string
 }
 
+
+// state types
 export interface IPageState<T> {
   data: T,
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
@@ -38,16 +41,3 @@ export interface IPageState<T> {
 }
 
 export type Language = "de-DE" | "en-US" | "fr-FR" | "es-ES"
-
-export interface IAppState {
-  serachPageState: IPageState<ISearchPageHotel[]>,
-  detailsPageState: IPageState<IDetailsPageHotel>,
-  language: Language
-}
-
-export type Payload = Language | number | string | ISearchPageHotel[] | IDetailsPageHotel | null
-
-export interface IAction {
-  type: string,
-  payload: Payload
-}

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchPagereducer from './searchPageSlice';
+import searchPagereducer from './searchPage/searchPageSlice';
 
 const store = configureStore({reducer: {
     searchPage: searchPagereducer
