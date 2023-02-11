@@ -34,6 +34,11 @@ const searchPageSlice = createSlice({
                 state.status = 'idle'
                 state.data = action.payload
             })
+            .addCase(fetchHotels.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message as string;
+                
+            })
     }
 })
 
@@ -56,3 +61,4 @@ export const hotelsSelector = createSelector(((state: { searchPage: IPageState<I
 })
 export const pageStatusSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.status, (status) => status)
 export const languageSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.language, (language) => language)
+export const errorSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.error, (error) => error)

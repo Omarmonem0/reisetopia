@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+// intial loading
 store.dispatch(fetchHotels("en-US"))
 
 root.render(

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HotelsList from '../../Components/Hotels/HotelsList/HotelList';
 import SearchBar from '../../Components/SearchBar/SearchBar';
-import { hotelsSelector , changeAppLanguage, pageStatusSelector, fetchHotels } from '../../Store/searchPageSlice';
+import { hotelsSelector , changeAppLanguage, pageStatusSelector, errorSelector } from '../../Store/searchPageSlice';
 import { Language } from '../../Store/type';
 
 interface SearchPageProps {
@@ -12,6 +12,7 @@ interface SearchPageProps {
 const SearchPage: FC<SearchPageProps> = () => {
     const dispatch = useDispatch()
     const pageStatus = useSelector(pageStatusSelector)
+    const error = useSelector(errorSelector)
     const hotels = useSelector(hotelsSelector)
     
     const search = () => {
@@ -22,11 +23,16 @@ const SearchPage: FC<SearchPageProps> = () => {
         dispatch(changeAppLanguage(language as Language))
     }
 
-
     return (
         <>
             <SearchBar submit={search} changeLanguage={changeLanguage} />
-            <HotelsList hotelCards={hotels} />
+            {
+                pageStatus === 'loading' ?
+                <div>Loading...</div> : 
+                pageStatus === 'failed' ?
+                <div>{error}</div> :
+                <HotelsList hotelCards={hotels} />
+            }
         </>
     );
 };

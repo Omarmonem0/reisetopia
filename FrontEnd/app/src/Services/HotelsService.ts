@@ -4,10 +4,8 @@ const BASE_URL = 'http://localhost:8000/v1/recruiting/hotels/'
 
 export const fetchAllHotels = async (language: Language) => {
     try {
-        console.log('here')
         const response = await fetch(`${BASE_URL}?lange=${language}`)
         const hotels = await response.json()
-        console.log('heree')
         return hotels.result
     } catch (e) {
         throw e
