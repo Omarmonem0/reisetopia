@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HotelsList from '../../Components/Hotels/HotelsList/HotelList';
 import SearchBar from '../../Components/SearchBar/SearchBar';
@@ -7,6 +7,7 @@ import { hotelsSelector , pageStatusSelector, errorSelector } from '../../Store/
 
 import { AppDisptach } from '../../Store/store';
 import { Language } from '../../Store/type';
+import { languageSelector } from './../../Store/searchPage/selectors';
 
 interface SearchPageProps {
 
@@ -18,9 +19,8 @@ const SearchPage: FC<SearchPageProps> = () => {
     const error = useSelector(errorSelector)
     const hotels = useSelector(hotelsSelector)
     
-    const search = async (searchTerm: string) => {
-        console.log(`Searching for ${searchTerm}`)
-        await dispatch(fetchHotelsThunk(searchTerm))
+    const search = (searchTerm: string) => {
+        dispatch(fetchHotelsThunk(searchTerm))
     }
 
     const changeLanguage = (language: string) => {
@@ -34,8 +34,8 @@ const SearchPage: FC<SearchPageProps> = () => {
                 pageStatus === 'loading' ?
                 <div>Loading...</div> : 
                 pageStatus === 'failed' ?
-                <div>{error}</div> :
-                <HotelsList hotelCards={hotels} />
+                <div>{error}</div> : pageStatus === 'succeeded' ?
+                <HotelsList hotelCards={hotels} /> : <></>
             }
         </>
     );

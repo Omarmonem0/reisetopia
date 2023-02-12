@@ -22,9 +22,7 @@ const DetailsPage: FC<DetailsPageProps> = () => {
     }
 
     useEffect(() => {
-        if (pageStatus === 'idle') {
-            getHotelById()
-        }
+        getHotelById()
     }, [])
 
     return (

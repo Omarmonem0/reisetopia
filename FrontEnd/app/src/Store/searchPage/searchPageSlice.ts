@@ -35,7 +35,7 @@ const searchPageSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(fetchHotelsThunk.fulfilled, (state, action) => {
-                state.status = 'idle'
+                state.status = 'succeeded'
                 state.data = action.payload
             })
             .addCase(fetchHotelsThunk.rejected, (state, action) => {

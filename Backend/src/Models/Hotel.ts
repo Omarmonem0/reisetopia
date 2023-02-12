@@ -15,5 +15,5 @@ export interface Hotel {
     benefits: Benefit[],
     images: Image[],
     lat: number,
-    long: number
+    lng: number
 }

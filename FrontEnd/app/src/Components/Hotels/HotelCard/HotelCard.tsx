@@ -22,7 +22,7 @@ const HotelCard: FC<HotelCardProps> = ({ image , name, address, distanceToCenter
             <div className='HotelInfoSection'>
                 <span>{name}</span>
                 <span>Address: {address}</span>
-                <span>Distance to center: {distanceToCenter}</span>
+                <span>Distance to center: {distanceToCenter} km</span>
             </div>
         </Link>
     );

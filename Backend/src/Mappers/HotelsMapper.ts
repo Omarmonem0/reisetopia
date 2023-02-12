@@ -6,6 +6,7 @@ import { HotelSearchResponse } from "../Models/HotelSearchResponse";
 import { HotelDetailsResponse } from "../Models/HotelDetailsResponse";
 import { Deal } from "../Models/Deal";
 import { Image } from './../Models/Image';
+const haversine = require('haversine')
 
 export class HotelsMapper {
     private languagesPriority: language[];
@@ -26,7 +27,7 @@ export class HotelsMapper {
                     address: this.translate(hotel.address, language),
                     city: this.translate(hotel.city, language),
                     description: this.translate(hotel.description, language),
-                    distanceToCenterKm: this.calculateDistanceToCenter(hotel.lat, hotel.long)
+                    distanceToCenterKm: this.calculateDistanceToCenter(hotel.lat, hotel.lng)
                 }
             })
             return localizedHotels;
@@ -95,8 +96,12 @@ export class HotelsMapper {
     }
 
     calculateDistanceToCenter(lat: number, long: number): number {
-        // TODO: calculate distance
-        return 0
+        const centerOfBerlin = {
+            latitude: 52.520008,
+            longitude: 13.404954
+        }
+        const distance = (haversine(centerOfBerlin, {latitude: lat, longitude: long}, { unit: 'km' }))
+        return Math.round(distance)
     }
 
 

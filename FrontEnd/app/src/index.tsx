@@ -18,10 +18,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-
-// intial loading
-store.dispatch(fetchHotelsThunk(''))
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +35,8 @@ const router = createBrowserRouter([
     ]
   },
 ]);
-
+// get intial data
+store.dispatch(fetchHotelsThunk(''))
 root.render(
   <React.StrictMode>
     <Provider store={store}>
