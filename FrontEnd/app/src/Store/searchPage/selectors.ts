@@ -4,6 +4,7 @@ import { IPageState, ISearchPageHotel } from "../type"
 export const hotelsSelector = createSelector(((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.data), (hotels) => {
     return hotels.map((hotel) => {
         return {
+            id: hotel.id,
             name: hotel.name,
             image: hotel.firstImage,
             address: hotel.address,

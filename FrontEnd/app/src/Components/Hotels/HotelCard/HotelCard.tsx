@@ -1,7 +1,9 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import './HotelCard.css';
 
 export interface HotelCardProps {
+    id: number,
     image: {
         url: string,
         caption: string
@@ -11,9 +13,9 @@ export interface HotelCardProps {
     distanceToCenter: number
 }
 
-const HotelCard: FC<HotelCardProps> = ({ image , name, address, distanceToCenter }) => {
+const HotelCard: FC<HotelCardProps> = ({ image , name, address, distanceToCenter, id }) => {
     return (
-        <div className='HotelCardContainer'>
+        <Link to={`hotels/${id}`} className='HotelCardContainer' >
             <div className='HotelImageSection'>
                 <img src={image.url} alt={image.caption} />
             </div>
@@ -21,9 +23,8 @@ const HotelCard: FC<HotelCardProps> = ({ image , name, address, distanceToCenter
                 <span>{name}</span>
                 <span>Address: {address}</span>
                 <span>Distance to center: {distanceToCenter}</span>
-
             </div>
-        </div>
+        </Link>
     );
 };
 

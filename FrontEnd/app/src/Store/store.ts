@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchPagereducer from './searchPage/searchPageSlice';
+import searchPageReducer from './searchPage/searchPageSlice';
+import detailsPageReducer from './detailsPage/detailsPageSlice'
 
 const store = configureStore({reducer: {
-    searchPage: searchPagereducer
+    searchPage: searchPageReducer,
+    detailsPage: detailsPageReducer
 }})
 
 export default store

@@ -3,7 +3,7 @@ import {
     createAsyncThunk,
 } from '@reduxjs/toolkit'
 import { IPageState, ISearchPageHotel, Language } from '../type'
-import { fetchHotelById, fetchHotels } from '../../Services/HotelsService';
+import { fetchHotelById } from '../../Services/HotelsService';
 import { IDetailsPageHotel } from '../type';
 
 
@@ -14,7 +14,7 @@ const initialState: IPageState<IDetailsPageHotel> = {
 }
 
 // Thunk functions
-export const fetchHotelByIdThunk = createAsyncThunk('searchPage/fetchHotelById', async (hotelId: number, {getState}) => {
+export const fetchHotelByIdThunk = createAsyncThunk('detailsPage/fetchHotelById', async (hotelId: number, {getState}) => {
     const state: {searchPage: IPageState<ISearchPageHotel[]>} = getState() as {searchPage: IPageState<ISearchPageHotel[]>}
     return await fetchHotelById(state.searchPage.language as Language, hotelId)
 })
@@ -31,13 +31,12 @@ const detailsPageSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(fetchHotelByIdThunk.fulfilled, (state, action) => {
-                state.status = 'idle'
+                state.status = 'succeeded'
                 state.data = action.payload
             })
             .addCase(fetchHotelByIdThunk.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message as string;
-                
+                state.error = action.error.message as string;  
             })
     }
 })

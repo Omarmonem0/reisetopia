@@ -21,7 +21,7 @@ export interface IDetailsPageHotel extends IBaseHotel {
   images: Image[]
 }
 
-interface Image {
+export interface Image {
   caption: string,
   url: string
 }

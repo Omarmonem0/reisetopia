@@ -6,18 +6,46 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './Store/store';
 import { fetchHotelsThunk } from './Store/searchPage/searchPageSlice';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import ErrorPage from './Pages/Error/Error';
+import DetailsPage from './Pages/DetailsPage/DetailsPage';
+import SearchPage from './Pages/SearchPage/SearchPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+
 // intial loading
 store.dispatch(fetchHotelsThunk(''))
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <SearchPage />
+      },
+      {
+        path: "hotels/:hotelId",
+        element: <DetailsPage />,
+      },
+    ]
+  },
+]);
+
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+        <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
 );
 
 reportWebVitals();

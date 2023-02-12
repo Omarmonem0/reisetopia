@@ -1,16 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit"
 import { IPageState, ISearchPageHotel } from "../type"
+import { IDetailsPageHotel } from '../type';
 
-export const hotelsSelector = createSelector(((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.data), (hotels) => {
-    return hotels.map((hotel) => {
-        return {
-            name: hotel.name,
-            image: hotel.firstImage,
-            address: hotel.address,
-            distanceToCenter: hotel.distanceToCenterKm
-        }
-    })
-})
-export const pageStatusSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.status, (status) => status)
-export const languageSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.language, (language) => language)
-export const errorSelector = createSelector((state: { searchPage: IPageState<ISearchPageHotel[]> }) => state.searchPage.error, (error) => error)
+export const hotelSelector = createSelector(((state: { detailsPage: IPageState<IDetailsPageHotel> }) => state.detailsPage.data), (hotel) => hotel)
+export const pageStatusSelector = createSelector((state: { detailsPage: IPageState<IDetailsPageHotel> }) => state.detailsPage.status, (status) => status)
+export const errorSelector = createSelector((state: { detailsPage: IPageState<IDetailsPageHotel> }) => state.detailsPage.error, (error) => error)
