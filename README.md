@@ -1,4 +1,7 @@
 # Backend
+
+### Prerequisite
+- Node version 16.14.0
 ### How to run
 - Navigate to Backend folder using this command `cd Backend`
 - Run `npm install`
