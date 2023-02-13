@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { HotelsController } from './Controller/HotelsController';
+import { HotelsController } from './Controllers/HotelsController';
 import { Database } from './Config/Database';
 import { LocaleMiddleware } from './Middlewares/LocaleMiddleware';
 import { RequestTypeMiddleware } from './Middlewares/RequestTypeMiddleware';

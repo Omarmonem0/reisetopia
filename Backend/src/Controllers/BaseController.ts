@@ -1,4 +1,4 @@
-import { BaseResponse } from './../Models/BaseResponse';
+import { BaseResponse } from '../Models/BaseResponse';
 export class BaseController {
     constructor() {
 

@@ -1,7 +1,7 @@
 import { HotelsMapper } from "../Mappers/HotelsMapper";
-import { HotelRepository } from "../Repository/HotelsRepository";
-import { HotelSearchResponse } from './../Models/HotelSearchResponse';
-import { HotelDetailsResponse } from './../Models/HotelDetailsResponse';
+import { HotelRepository } from "../Repositories/HotelsRepository";
+import { HotelSearchResponse } from '../Models/HotelSearchResponse';
+import { HotelDetailsResponse } from '../Models/HotelDetailsResponse';
 import { language } from "../Constants/Constants";
 import { Hotel } from "../Models/Hotel";
 

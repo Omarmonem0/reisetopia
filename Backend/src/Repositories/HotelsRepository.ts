@@ -1,7 +1,7 @@
 import { DESTRUCTION } from 'dns';
 import { language } from '../Constants/Constants';
-import { Database } from './../Config/Database';
-import { Hotel } from './../Models/Hotel';
+import { Database } from '../Config/Database';
+import { Hotel } from '../Models/Hotel';
 export class HotelRepository {
 
     getAllHotels(): Hotel[] {

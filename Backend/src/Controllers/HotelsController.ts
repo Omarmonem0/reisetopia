@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { HotelDetailsResponse } from "../Models/HotelDetailsResponse";
 import { HotelSearchResponse } from "../Models/HotelSearchResponse";
-import { HotelsService } from "../Service/HotelsService";
-import { requestType, statusCodes } from './../Constants/Constants';
-import { BaseResponse } from './../Models/BaseResponse';
+import { HotelsService } from "../Services/HotelsService";
+import { requestType, statusCodes } from '../Constants/Constants';
+import { BaseResponse } from '../Models/BaseResponse';
 import { BaseController } from './BaseController';
 
 export class HotelsController extends BaseController {
