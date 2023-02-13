@@ -20,7 +20,7 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/hotels",
+    path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <SearchPage />
       },
       {
-        path: "hotels/:hotelId",
+        path: "/hotels/:language/:hotelId",
         element: <DetailsPage />,
       },
     ]
